@@ -1,0 +1,334 @@
+#FUNCOES
+def exibe_lista():                                                              #MENU PRINCIPAL
+  print("1 - Adicionar produtos.")
+  print("2 - Adicionar serviços.")
+
+def exibe_produtos():                                                           #PRINTA A LISTA DE PRODUTOS E DEMAIS OPÇÕES DO MENU PRODUTOS.
+  print(prods)                                                                  #LISTA DE PRODUTOS 
+  print("---------------")  
+  print("6 - Adicionar serviços.")
+  print("7 - Finalizar.")
+
+def exibe_serv():                                                               #PRINTA A LISTA DE PRODUTOS E DEMAIS OPÇÕES DO MENU SERVIÇOS.
+  print(servs)                                                                  #LISTA DE SERVIÇOS 
+  print("---------------")   
+  print("6 - Prosseguir para agendamento.")
+  print("7 - Salvar e Voltar.")    
+
+def exibe_pgtos():                                                              #EXIBE LISTA DE FORMAS DE PAGAMENTO
+  print(pgtos)
+
+def selec_serv():       
+  global n6 
+  global n7
+  global n8
+  global n9
+  global n10
+  global soma
+  global p_final_serv
+
+  for s in range(6):                                                           #DEFINE O INTERVALO DA VARIÁVEL S PARA SERVIÇOS DENTRO DA LISTA 
+    print("-------------------------------------------") 
+    exibe_serv()                                                               #EXIBE LISTA DE SERVIÇOS     
+    s = int(input("Digite uma opção de serviço: "))                           
+    while s < 1 or s > 7:                                                      #VALIDAÇÃO OPÇÕES DE SERVIÇOS 
+      s = int(input("Opção Inválida! Digite uma opção de serviço: ")) 
+
+    if s == 1:                                                                 #OPÇÃO SERVIÇO 1
+      print(servs[0], "R$90.00")                                               #PRINTA SERVIÇO E PREÇO 
+      n6 = 1                                                                   #DEFINE VAR DE CONTROLE COMO 1          
+      soma += 90.00                                                            #INCREMENTA A VARIÁVEL SOMA (VALOR TOTAL)                                     
+      print(f'Valor Total R${soma:.2f}')                                       #PRINTA VARIÁVEL SOMA  
+      print("-------------------------------------------") 
+    elif s == 2:                                                               #OPÇÃO DE SERVIÇO 2
+      print(servs[1], "R$105.00")
+      n7 = 1
+      soma += 105.00  
+      print(f'Valor Total R${soma:.2f}')
+      print("-------------------------------------------") 
+    elif s == 3: 
+      print(servs[2], "R$185.00")
+      n8 = 1
+      soma += 185.00  
+      print(f'Valor Total R${soma:.2f}')
+      print("-------------------------------------------") 
+    elif s == 4: 
+      print(servs[3], "R$90.00")
+      n9 = 1
+      soma += 90.00 
+      print(f'Valor Total R${soma:.2f}')
+      print("-------------------------------------------") 
+    elif s == 5: 
+      print(servs[4], "R$295.00")
+      n10 = 1
+      soma += 295.00 
+      print(f'Valor Total R${soma:.2f}')
+      print("-------------------------------------------") 
+    elif s == 6:
+      agenda()                                                                 #CHAMA A FUNÇÃO AGENDAMENTO
+      print("-------------------------------------------")
+    else:
+     break 
+  p_final_serv = (n6*90.00 + n7*105.00 + n8*185.00 + n9*90.00 + n10*295.00)    #CALCULA A SOMA DO VALOR DOS SERVIÇOS  
+
+def agenda():                                                                         #FUNÇÃO AGENDAMENTO
+  global mes
+  global dia
+  mes = 0
+  dia = 0
+
+  mes = int(input("Insira o mês em que deseja realizar o agendamento: "))             #INPUT DO MÊS
+  while mes < 1 or mes > 12:                                                          #VALIDAÇÃO MÊS
+    mes = int(input("Mês inválido! Insira o mês em que deseja realizar o agendamento: "))
+  dia = int(input("Insira o dia em que deseja realizar o agendamento: "))             #INPUT DO DIA 
+  if mes == 2:                                                                        #VALIDAÇÃO MES 2 (DIA <= 28)
+    while dia > 28:
+      dia = int(input("Dia inválido para este mês! Insira o dia em que deseja realizar o agendamento: "))
+  while dia < 1 or dia > 31:                                                          #CONSIDERAMOS 31 DIAS 
+    dia = int(input("Dia inválido! Insira o dia em que deseja realizar o agendamento: "))
+  print(f"Seu serviço está agendado para {dia}/{mes}")      
+
+def selec_prod():          
+  global n1 
+  global n2
+  global n3
+  global n4
+  global n5
+  global soma  
+  global p_final_prod
+
+  for p in range(6):                                                        #DEFINE O INTERVALO DA VARIÁVEL P PARA PRODUTOS DENTRO DA LISTA 
+    print("----------------------------------")                             
+    exibe_produtos()                                                        #EXIBE A LISTA DE PRODUTOS  
+    p = int(input("Digite uma opção de produto: "))
+    while p < 1 or p > 7:                                                   #VALIDAÇÃO OPÇÕES  
+      p = int(input("Opção Inválida! Digite uma opção de produto: "))       
+    if p == 1:                                                              #PRODUTO 1
+      print(prods[0], "R$159.50")                                           #EXIBE VALOR PRODUTO 1
+      n1 = int(input("Quantos deste item você gostaria? "))                 #INPUT QUANTIDADE
+      while n1 < 0:                                                         #VALIDAÇÃO QUANTIDADE
+        n1 = int(input("Erro! Digite um valor válido: "))
+      soma += (159.50*n1)                                                   #INCREMENTO DA VARIÁVEL SOMA (VALOR TOTAL)
+      print(f'Valor Total R${soma:.2f}')                                    #PRINTA SOMA DOS PRODUTOS
+    elif p == 2:                                                            #PRODUTO 2
+      print(prods[1], "R$190.00")
+      n2 = int(input("Quantos deste item você gostaria? "))
+      while n2 < 0:  
+        n2 = int(input("Erro! Digite um valor válido: "))
+      soma += (190.00*n2)
+      print(f'Valor Total R${soma:.2f}')
+    elif p == 3:
+      print(prods[2], "R$69.50")
+      n3 = int(input("Quantos deste item você gostaria? "))
+      while n3 < 0:  
+        n3 = int(input("Erro! Digite um valor válido: "))
+      soma += (69.50*n3)
+      print(f'Valor Total R${soma:.2f}')  
+    elif p == 4:
+      print(prods[3],"R$367.50")
+      n4 = int(input("Quantos deste item você gostaria? "))
+      while n4 < 0:  
+        n4 = int(input("Erro! Digite um valor válido: "))  
+      soma += (367.50*n4)
+      print(f'Valor Total R${soma:.2f}')
+    elif p == 5:
+      print(prods[4],"R$449.50")
+      n5 = int(input("Quantos deste item você gostaria? "))
+      while n5 < 0:  
+        n5 = int(input("Erro! Digite um valor válido: "))
+      soma += (449.50*n5)  
+      print(f'Valor Total R${soma:.2f}')
+    elif p == 6:                                                                #OPÇÃO 6 - MENU DE SERVIÇOS
+      selec_serv()                                                              #CHAMA A FUNÇÃO SERVIÇOS
+    else:
+     break
+  p_final_prod = (n1*159.50 + n2*190.00 + n3*69.50 + n4*367.50 + n5*449.50)     #CALCULA A SOMA DOS PRODUTOS
+     
+def funcao_print_prod(n1, n2, n3, n4, n5):                                      #PRINT PRODUTOS 
+  global p_final_prod2  
+
+  if n1 != 0:                                                                   #CONDIÇÃO PARA PRINTAR O PRODUTO
+    print(n1,"x ",prods[0],"...........R$",n1*159.50)                           #PRINT QUANTIDADE DE PRODUTOS E VALOR TOTAL POR PROD.
+  if n2 != 0:
+    print(n2,"x ",prods[1],"...........R$",n2*190.00)   
+  if n3 != 0:
+    print(n3,"x ",prods[2],"...........R$",n3*69.50) 
+  if n4 != 0:
+    print(n4,"x ",prods[3],"...........R$",n4*367.50) 
+  if n5 != 0:
+    print(n5,"x ",prods[4],"...........R$",n5*449.50)
+  print("----------------------------------")
+  p_final_prod2 = (n1*159.50 + n2*190.00 + n3*69.50 + n4*367.50 + n5*449.50)    #CALCULA VALOR TOTAL DOS PRODUTOS
+  print(f"Valor total dos produtos: R${p_final_prod:.2f}")                      #PRINT EXIBE VALOR FINAL
+  print("----------------------------------") 
+
+def funcao_print_serv(n6, n7, n8, n9, n10):                                     #FUNÇÃO PRINT SERVIÇOS
+  if n6 != 0:                                                                   #CONDIÇÃO PARA PRINTAR SERVIÇOS
+    print(f"{n6} x {servs[0]}..... R$90.00")                                    #PRINTA O SERVIÇO E O VALOR
+  if n7 != 0:
+    print(f"{n7} x {servs[1]}..... R$105.00")
+  if n8 != 0:
+    print(f"{n8} x {servs[2]}..... R$185.00") 
+  if n9 != 0:
+    print(f"{n9} x {servs[3]}..... R$90.00") 
+  if n10 != 0:
+    print(f"{n10} x {servs[4]}..... R$295.00")
+
+  print("----------------------------------")
+  global p_final_serv2
+  p_final_serv2 = (n6*90.00 + n7*105.00 + n8*185.00 + n9*90.00 + n10*295.00)     #CALCULA SOMA DOS SERVIÇOS
+  print(f"Valor total dos serviços: R${p_final_serv:.2f}")                       #PRINTA VALOR FINAL DOS SERVIÇOS
+  print("----------------------------------") 
+
+def op_pgto():                                                                   #FUNÇÃO OPÇÃO DE PAGAMENTO
+  exibe_pgtos()                                                                  #EXIBE LISTA DE PAGAMENTOS
+  pagar = int(input("Digite para selecionar uma opção de pagamento: "))          #INPUT OPÇÃO DE PAGAMENTO
+  while pagar < 1 or pagar > 5:                                                  #VALIDAÇÃO INPUT       
+      pagar = int(input("Opção Inválida! Digite uma opção de pagamento: "))
+  if pagar == 1:                                                                 #OPÇÃO DINHEIRO 
+      print("Valor Total: R$",(p_final_prod + p_final_serv))
+      print("Favor inserir as cédulas no local indicado.")
+      func_troco()                                                               #CHAMA FUNÇÃO TROCO 
+  elif pagar == 2:
+      print("Favor inserir seu cartão no local indicado.")                       #OPÇÃO DÉBITO
+  elif pagar == 3:                                                               #OPÇÃO CRÉDITO A VISTA 
+      print("Favor inserir seu cartão no local indicado.")
+  else:                                                                          #OPÇÃO DE CRÉDITO PARCELADO 
+    parcelas = int(input("É possível parcelar em até 4 vezes, em quantas vezes gostaria de parcelar sua compra? \n"))
+    while parcelas < 2 or parcelas > 4:                                          #VALIDAÇÃO DAS 4 PARCELAS  
+      parcelas = int(input("Opção Inválida! É possível parcelar em até 4 vezes, em quantas vezes gostaria de parcelar sua compra?: "))
+    print(f"Valor final será dividido em {parcelas} parcelas de R${(p_final_prod + p_final_serv) / parcelas:.2f}.\nFavor inserir seu cartão no local indicado.")
+
+
+def func_troco():                                                                #FUNÇÃO TROCO 
+ valor_pago = float(input("Insira o valor a pagar: "))                           #BLOCO DEMONSTRATIVO Á PARTE 
+ while valor_pago < (p_final_prod + p_final_serv):                             
+   valor_pago = float(input("Valor insuficiente! Insira o valor a pagar: "))
+ troco = (valor_pago - (p_final_prod + p_final_serv))                                 
+
+ n_50 = int(troco / 50)                                                         
+ troco = troco % 50
+    
+ n_20 = int(troco/20)
+ troco = troco % 20
+
+ n_10 = int(troco/10)
+ troco = troco % 10
+
+ n_5 = int(troco/5)
+ troco = troco % 5
+
+ n_2 = int(troco/2)
+ troco = troco % 2
+
+ n_1 = int(troco/1)
+ troco = troco % 1
+
+ print("---------------Troco---------------")
+ if n_50 != 0:   
+  print(n_50,' Notas R$ 50,00')
+ if n_20 != 0: 
+  print(n_20,' Notas R$ 20,00')
+ if n_10 != 0: 
+  print(n_10,' Notas R$ 10,00') 
+ if n_5 != 0: 
+  print(n_5,' Notas R$ 5,00')
+ if n_2 != 0: 
+  print(n_2,' Notas R$ 2,00')
+ if n_1 != 0:
+  print(n_1,' Notas R$ 1,00') 
+ print("------------------------------------")
+ 
+ #PRINCIPAL
+p_final_serv = 0
+p_final_prod = 0                                                                       #VARIÁVEL DE LOOPING
+mes = 0
+dia = 0
+o = "A"
+
+                                                                                
+prods = ['1 - Pneu', '2 - Correia Dentada', '3 - Disco de freio', '4 - Bateria', '5 - Alternador']       #LISTAS
+servs = ['1- Troca de óleo', '2 - Troca de pneu', '3 - Alinhamento e Balanceamento', '4- Limpeza sistema de injecao', '5 - Troca de bateria']
+pgtos = ["1 - dinheiro", "2 - débito", "3 - crédito à vista", "4 - crédito parcelado"] 
+
+while o == "A":                                                                 #OPÇÃO ACESSAR O SISTEMA
+ mes = 0
+ dia = 0
+ soma = 0
+ n1 = 0
+ n2 = 0
+ n3 = 0
+ n4 = 0
+ n5 = 0
+ n6 = 0
+ n7 = 0
+ n8 = 0
+ n9 = 0
+ n10 = 0
+
+ print("Seja bem-vindo(a) à oficina MecâniCode!")                               
+ o = input("Digite (A) para acessar ou (F) para finalizar: ")
+ o = o.upper()                                                                  #DEFINE VAR O COMO MAIÚSCULA
+ while o != "A" and o != "F":                                                   #VALIDAÇÃO DA VAR O 
+   o = input("Digite uma opção válida: ")
+   o = o.upper()                                          
+ if o == "A":                                                                   #CONDIÇÃO A PARA ACESSAR
+   exibe_lista()                                                                #CHAMA A FUNÇÃO QUE EXIBE O MENU PRINCIPAL
+   o2 = input("Digite uma opção: ")                                             #OPÇÃO DO MENU PRINCIPAL
+
+   if o2 == "1":                                                                #OPÇÃO 1
+    selec_prod()                                                                #CHAMA A FUNÇÃO DE SELEÇÃO DE PRODUTOS
+
+   elif o2 == "2":                                                              #OPÇÃO 2
+    selec_serv()                                                                #CHAMA SELEÇÃO DE SERVIÇÕS
+    selec_prod()                                                                #RETORNA PARA SELEÇÃO DE PRODUTOS NA OPÇÃO 7 EM SERVIÇOS
+   print("--------------------") 
+   print("Valor final dos produtos: R$",p_final_prod)                           #VALOR FINAL DE PRODUTOS                   
+   print("Valor final dos serviços: R$",p_final_serv)                           #VALOR FINAL DE SERVIÇOS    
+   print("Valor total dos pedidos: R$",(p_final_prod + p_final_serv))           #VALOR TOTAL    
+   print("--------------------")
+   o2 = input("Deseja desistir da compra? (S/N)")                               #PRIMEIRA OPÇÃO DE DESISTÊNCIA
+   o2 = o2.upper()                                                              #RECEBE MAIÚSCULO
+   while o2 != "N" and o2 != "S":                                               #VALIDAÇÃO DE DESISTÊNCIA 
+     o2 = input("Opção inválida! Deseja desistir da compra? (S/N) ")            
+     o2 = o2.upper()
+   if o2 == 'S':                                                                #CASO "SIM"
+     print("Você está deixando de adquirir os seguintes produtos: ")
+     funcao_print_prod(n1, n2, n3, n4, n5)
+     print("e os seguintes serviços: ")
+     funcao_print_serv(n6, n7, n8, n9, n10)
+     if mes != 0 and dia != 0:
+       print(f"Agendados para: {dia}/{mes}/2021")
+     o3 = input("Confirma o cancelamento? (S/N)")
+     o3 = o3.upper()
+     while o3 != "N" and o3 != "S":                                               #VALIDAÇÃO DE DESISTÊNCIA 
+      o3 = input("Opção inválida! Deseja desistir da compra? (S/N) ")             
+      o3 = o3.upper()
+     if o3 == "S":                                                                #CASO CONFIRME DESISTÊNCIA 
+      print("Compra cancelada!")
+     elif o3 == "N":                                                              #CASO NÃO CONFIRME DESISTENCIA  
+       o2 = "N"                                                                   #DEFINE O2 COMO N
+       print('-----------------------')                                           #O2 É A VAR DA PRIMEIRA OPÇÃO DE DESISTÊNCIA
+       
+   if o2 == 'N':                                                                  #CONDIÇÃO DE NÃO DESISTÊNCIA                                                                 
+    op_pgto()                                                                     #CHAMA FUNÇÃO OPÇÃO DE PAGAMENTO
+    funcao_print_prod(n1, n2, n3, n4, n5)                                         #CHAMA FUNÇÃO PRINT PRODUTOS    
+    funcao_print_serv(n6, n7, n8, n9, n10)                                        #CHAMA FUNÇÃO PRINT SERVIÇOS  
+
+   if mes != 0 and dia != 0:                                                      #CONDIÇÃO PARA PRINT AGENDAMENTO
+     print(f"Agendamento de serviços para: {dia}/{mes}/2021")                     #PRINT AGENDAMENTO                
+   elif o3 == "S":                                                                #VALIDAÇÃO DA CONFIRMAÇÃO DE COMPRA
+     print("-------------------------------")
+   elif n6 != 0 or n7 != 0 or n8 != 0 or n9 != 0 or n10 != 0 and mes == 0:        #CONDIÇÃO PARA CONFIRMAR O AGENTAMENTO
+     n_agend = input("Você não realizou agendamento. Gostaria de marcar uma data para os seus serviços? (S/N) ")
+     n_agend = n_agend.upper()                                                    #OPÇÃO AGENDAMENTO PARA MAIÚSCULO  
+     if n_agend == "S":                                                           #CASO SIM
+       agenda()                                                                   #CHAMA FUNÇÃO AGENDA  
+     elif n_agend == "N":                                                         #CASO NÃO  
+       print("Não deixe de realizar seu agendamento em um momento posterior!") 
+
+
+   print(f"Valor final R$ {(p_final_prod + p_final_serv):.2f}")                   #EXIBE O VALOR TOTAL
+   print("-------------------------------")  
+   print("-----Obrigado pela visita!-----")                                       #AGRADECE E RETORNA PARA O ACESSO DO SISTEMA (A/F)    
+   print("-------------------------------")
